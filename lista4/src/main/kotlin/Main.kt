@@ -49,15 +49,18 @@ val <T> List<T>.head
     get() = first()
 
 val <T> List<T>.tail
-    get() = last()
+    get() = drop(1)
 //zad7
 fun <A> isSorted(aa: List<A>, order: (A, A) -> Boolean): Boolean{
-    for (x in 0..aa.size){
-        for (y in x+1 until aa.size){
-            return (order(aa[x],aa[y]))
-        }
+
+    var check = true
+    for (x in aa.indices){
+        if (x < aa.size - 1 && order(aa.head, aa.tail[x]) )
+            check = true
+        else if (x < aa.size - 1 && !order(aa.head, aa.tail[x]))
+            check = false
     }
-    return true
+    return check
 }
 //zad8
 fun suma(a: Array<Int>): Int {
